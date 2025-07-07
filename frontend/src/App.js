@@ -82,16 +82,38 @@ const clearCanvas = () => {
      <h1>Handwritten Digit Recognition</h1>
        <h4>Draw a Digit on board between (0-9)</h4>
 
-       <canvas 
-        ref={canvasRef}
-       height={280}
-        width={280}
-         onMouseDown={startDrawing}
-          onMouseUp={stopDrawing}
-           onMouseLeave={stopDrawing}  
-            style={{ border: '1px solid black', backgroundColor: 'white' }}
-            onMouseMove={draw}
-            > </canvas>
+     <canvas
+  ref={canvasRef}
+  height={280}
+  width={280}
+  onMouseDown={startDrawing}
+  onMouseUp={stopDrawing}
+  onMouseLeave={stopDrawing}
+  onMouseMove={draw}
+  onTouchStart={(e) => {
+    e.preventDefault(); // prevent scrolling
+    startDrawing();
+  }}
+  onTouchEnd={(e) => {
+    e.preventDefault();
+    stopDrawing();
+  }}
+  onTouchCancel={(e) => {
+    e.preventDefault();
+    stopDrawing();
+  }}
+  onTouchMove={(e) => {
+    e.preventDefault();
+    const touch = e.touches[0];
+    draw({
+      clientX: touch.clientX,
+      clientY: touch.clientY,
+    });
+  }}
+  style={{ border: '1px solid black', backgroundColor: 'white', touchAction: 'none' }}
+/>
+
+
 
             <br></br>
 
