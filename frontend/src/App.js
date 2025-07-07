@@ -10,6 +10,7 @@ function App() {
  const canvasRef = useRef(null);
 const [isDrawing,setDrawaing]=useState(false);
 const [prediction,setPrediction]=useState('');
+ const [loading, setLoading] = useState(false);
 
 const startDrawing=()=>setDrawaing(true);
 const stopDrawing=()=>setDrawaing(false);
@@ -40,6 +41,7 @@ const draw=(e)=>{
 
 
 const caller = () => {
+ setLoading(true);
     const originalCanvas = canvasRef.current;
 
     
@@ -66,7 +68,9 @@ const caller = () => {
       })
       .catch((err) => {
         setPrediction('Error: ' + err.message);
-      });
+      }).finally(() => {
+      setLoading(false); 
+    });
   };
 
 const clearCanvas = () => {
@@ -118,7 +122,9 @@ const clearCanvas = () => {
             <br></br>
 
 
-            <button onClick={caller}>Predict</button>
+            <button onClick={caller} disabled={loading}>
+  {loading ? 'Predicting...' : 'Predict'}
+</button>
             <button onClick={clearCanvas}>Clear</button>
             <p>{prediction}</p>
     </div>
