@@ -1,0 +1,30 @@
+body{
+    margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: white;
+}
+
+.App{
+  text-align: center;
+  margin-top: 160px;
+}
+
+button{
+  width: 78px;
+  height: 37px;
+  margin-left: 29px;
+  margin-top: 19px;
+  background-color: transparent;
+  color: red;
+  border: 2px solid red;
+  border-radius: 5px;
+}
+
+button:hover{
+ cursor: pointer;
+ background-color: red;
+ border: 2px solid red;
+ color: white;
+ font-weight: 500;
+}
